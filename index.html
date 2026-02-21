@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CARD GEN ONLINE</title>
+
+<style>
+
+body{
+margin:0;
+background:black;
+color:#00ff00;
+font-family:Courier New, monospace;
+overflow:hidden;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.box{
+width:750px;
+margin:auto;
+margin-top:40px;
+background:rgba(0,0,0,0.85);
+padding:25px;
+border:1px solid #00ff00;
+box-shadow:0 0 20px #00ff00;
+}
+
+h2{
+text-align:center;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+50%{opacity:0.3;}
+}
+
+input,select,textarea{
+
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+background:black;
+color:#00ff00;
+border:1px solid #00ff00;
+font-family:Courier New;
+
+}
+
+textarea{
+height:220px;
+}
+
+button{
+
+width:100%;
+padding:12px;
+background:black;
+color:#00ff00;
+border:1px solid #00ff00;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#001a00;
+box-shadow:0 0 10px #00ff00;
+
+}
+
+.footer{
+
+text-align:center;
+margin-top:15px;
+
+}
+
+.footer a{
+
+color:#00ff00;
+text-decoration:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="box">
+
+<h2>[ ACCESS GRANTED - CARD GEN ONLINE ]</h2>
+
+BIN
+<input type="text" id="bin">
+
+MONTH
+<select id="month">
+<option value="random">RANDOM</option>
+</select>
+
+YEAR
+<select id="year">
+<option value="random">RANDOM</option>
+</select>
+
+CVV
+<input type="text" id="cvv" placeholder="RANDOM IF EMPTY">
+
+QUANTITY
+<input type="number" id="qty" value="10">
+
+<button onclick="generate()">GENERATE CARDS</button>
+
+RESULT
+<textarea id="result"></textarea>
+
+<button onclick="copy()">COPY OUTPUT</button>
+
+</div>
+
+<div class="footer">
+
+OWNER:
+<a href="https://t.me/SHUVO_MAHMUD01">
+MR SHUVO AHAMMAD
+</a>
+
+<br>
+
+CHANNEL:
+<a href="https://t.me/boost_help_zone04">
+TRICK ZONE BOOST CENTER
+</a>
+
+</div>
+
+<script>
+
+// MATRIX EFFECT
+
+let canvas=document.getElementById("matrix");
+
+let ctx=canvas.getContext("2d");
+
+canvas.height=window.innerHeight;
+
+canvas.width=window.innerWidth;
+
+let letters="01";
+
+letters=letters.split("");
+
+let fontSize=14;
+
+let columns=canvas.width/fontSize;
+
+let drops=[];
+
+for(let i=0;i<columns;i++)
+drops[i]=1;
+
+function draw(){
+
+ctx.fillStyle="rgba(0,0,0,0.05)";
+
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#0f0";
+
+ctx.font=fontSize+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+
+let text=letters[Math.floor(Math.random()*letters.length)];
+
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+if(drops[i]*fontSize>canvas.height&&Math.random()>0.975)
+drops[i]=0;
+
+drops[i]++;
+
+}
+
+}
+
+setInterval(draw,33);
+
+// month
+
+for(let i=1;i<=12;i++){
+
+let m=i.toString().padStart(2,"0");
+
+document.getElementById("month").innerHTML+=`<option value="${m}">${m}</option>`;
+
+}
+
+// year
+
+for(let i=2026;i<=2035;i++){
+
+document.getElementById("year").innerHTML+=`<option value="${i}">${i}</option>`;
+
+}
+
+function random(min,max){
+
+return Math.floor(Math.random()*(max-min+1))+min;
+
+}
+
+function generate(){
+
+let bin=document.getElementById("bin").value;
+
+let month=document.getElementById("month").value;
+
+let year=document.getElementById("year").value;
+
+let cvv=document.getElementById("cvv").value;
+
+let qty=document.getElementById("qty").value;
+
+let out="";
+
+for(let i=0;i<qty;i++){
+
+let number=bin;
+
+while(number.length<16){
+
+number+=random(0,9);
+
+}
+
+let mm=(month=="random")?random(1,12).toString().padStart(2,"0"):month;
+
+let yy=(year=="random")?random(2026,2035):year;
+
+let cv=(cvv=="")?random(100,999):cvv;
+
+out+=number+"|"+mm+"|"+yy+"|"+cv+"\n";
+
+}
+
+document.getElementById("result").value=out;
+
+}
+
+function copy(){
+
+let text=document.getElementById("result");
+
+text.select();
+
+document.execCommand("copy");
+
+alert("COPIED SUCCESSFULLY");
+
+}
+
+</script>
+
+</body>
+</html>
