@@ -12,8 +12,6 @@ margin:0;
 font-family:Consolas, monospace;
 color:#00ffcc;
 
-/* PREMIUM HACKER BACKGROUND */
-
 background:
 linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
 url("https://wallpaperaccess.com/full/2825704.gif");
@@ -24,19 +22,19 @@ background-attachment:fixed;
 
 }
 
-/* FULL SCREEN PANEL */
+/* MAIN PANEL */
 
 .main{
 
 width:97vw;
-height:88vh;
+height:90vh;
 
 margin:auto;
 margin-top:2vh;
 
 background:rgba(0,0,0,0.75);
 
-border:1px solid #00ffcc;
+border:2px solid #00ffcc;
 
 box-shadow:
 0 0 20px #00ffcc,
@@ -51,11 +49,10 @@ padding:30px;
 .title{
 
 text-align:center;
-font-size:26px;
-margin-bottom:20px;
-letter-spacing:2px;
-
-text-shadow:0 0 10px #00ffcc;
+font-size:36px;
+margin-bottom:25px;
+font-weight:bold;
+text-shadow:0 0 15px #00ffcc;
 
 }
 
@@ -64,9 +61,8 @@ text-shadow:0 0 10px #00ffcc;
 .flex{
 
 display:flex;
-height:80%;
-
-gap:20px;
+height:75%;
+gap:25px;
 
 }
 
@@ -92,16 +88,15 @@ height:100%;
 input, select{
 
 width:100%;
-padding:14px;
-margin-bottom:15px;
+padding:18px;
+margin-bottom:18px;
 
 background:black;
-
 color:#00ffcc;
 
 border:1px solid #00ffcc;
 
-font-size:16px;
+font-size:20px;
 
 }
 
@@ -113,14 +108,19 @@ width:100%;
 height:85%;
 
 background:black;
-
 color:#00ffcc;
 
 border:1px solid #00ffcc;
 
-padding:15px;
+padding:20px;
 
-font-size:15px;
+font-size:22px;
+
+font-weight:bold;
+
+line-height:1.8;
+
+letter-spacing:1px;
 
 }
 
@@ -129,15 +129,14 @@ font-size:15px;
 button{
 
 width:100%;
-padding:15px;
+padding:18px;
 
 background:black;
-
 color:#00ffcc;
 
 border:1px solid #00ffcc;
 
-font-size:17px;
+font-size:22px;
 
 cursor:pointer;
 
@@ -146,7 +145,6 @@ cursor:pointer;
 button:hover{
 
 background:#001a1a;
-
 box-shadow:0 0 15px #00ffcc;
 
 }
@@ -156,7 +154,24 @@ box-shadow:0 0 15px #00ffcc;
 .footer{
 
 text-align:center;
-margin-top:10px;
+margin-top:15px;
+
+font-size:26px;
+font-weight:bold;
+
+}
+
+.footer a{
+
+color:#00ffcc;
+text-decoration:none;
+font-size:28px;
+
+}
+
+.footer a:hover{
+
+text-shadow:0 0 10px #00ffcc;
 
 }
 
@@ -209,8 +224,17 @@ QUANTITY
 
 <div class="footer">
 
-OWNER: MR SHUVO AHAMMAD<br>
-CHANNEL: TRICK ZONE BOOST CENTER
+OWNER:
+<a href="https://t.me/SHUVO_MAHMUD01" target="_blank">
+MR SHUVO AHAMMAD
+</a>
+
+<br><br>
+
+CHANNEL:
+<a href="https://t.me/boost_help_zone04" target="_blank">
+TRICK ZONE BOOST CENTER
+</a>
 
 </div>
 
@@ -221,18 +245,25 @@ CHANNEL: TRICK ZONE BOOST CENTER
 /* MONTH */
 
 for(let i=1;i<=12;i++){
+
 let m=i.toString().padStart(2,"0");
+
 month.innerHTML+=`<option value="${m}">${m}</option>`;
+
 }
 
 /* YEAR */
 
 for(let i=2026;i<=2035;i++){
+
 year.innerHTML+=`<option value="${i}">${i}</option>`;
+
 }
 
 function random(min,max){
+
 return Math.floor(Math.random()*(max-min+1))+min;
+
 }
 
 function generate(){
@@ -247,7 +278,9 @@ while(num.length<16)
 num+=random(0,9);
 
 let mm=month.value=="random"?random(1,12):month.value;
+
 let yy=year.value=="random"?random(2026,2035):year.value;
+
 let cv=cvv.value==""?random(100,999):cvv.value;
 
 out+=num+"|"+mm+"|"+yy+"|"+cv+"\n";
@@ -261,7 +294,10 @@ result.value=out;
 function copy(){
 
 result.select();
+
 document.execCommand("copy");
+
+alert("COPIED SUCCESSFULLY");
 
 }
 
