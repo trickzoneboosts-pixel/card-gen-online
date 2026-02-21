@@ -26,11 +26,11 @@ background-attachment:fixed;
 
 .main{
 
-width:97vw;
-height:90vh;
+width:98vw;
+height:92vh;
 
 margin:auto;
-margin-top:2vh;
+margin-top:1vh;
 
 background:rgba(0,0,0,0.75);
 
@@ -40,7 +40,7 @@ box-shadow:
 0 0 20px #00ffcc,
 0 0 40px #00ffcc inset;
 
-padding:30px;
+padding:25px;
 
 }
 
@@ -50,9 +50,8 @@ padding:30px;
 
 text-align:center;
 font-size:36px;
-margin-bottom:25px;
+margin-bottom:20px;
 font-weight:bold;
-text-shadow:0 0 15px #00ffcc;
 
 }
 
@@ -62,7 +61,7 @@ text-shadow:0 0 15px #00ffcc;
 
 display:flex;
 height:75%;
-gap:25px;
+gap:20px;
 
 }
 
@@ -85,11 +84,11 @@ height:100%;
 
 /* INPUT */
 
-input, select{
+input{
 
 width:100%;
 padding:18px;
-margin-bottom:18px;
+margin-bottom:15px;
 
 background:black;
 color:#00ffcc;
@@ -116,11 +115,11 @@ padding:20px;
 
 font-size:22px;
 
-font-weight:bold;
+font-family:Consolas, monospace;
+
+white-space:pre;
 
 line-height:1.8;
-
-letter-spacing:1px;
 
 }
 
@@ -142,22 +141,14 @@ cursor:pointer;
 
 }
 
-button:hover{
-
-background:#001a1a;
-box-shadow:0 0 15px #00ffcc;
-
-}
-
 /* FOOTER */
 
 .footer{
 
 text-align:center;
-margin-top:15px;
+margin-top:10px;
 
 font-size:26px;
-font-weight:bold;
 
 }
 
@@ -165,13 +156,8 @@ font-weight:bold;
 
 color:#00ffcc;
 text-decoration:none;
+
 font-size:28px;
-
-}
-
-.footer a:hover{
-
-text-shadow:0 0 10px #00ffcc;
 
 }
 
@@ -190,20 +176,7 @@ text-shadow:0 0 10px #00ffcc;
 <div class="left">
 
 BIN
-<input id="bin">
-
-MONTH
-<select id="month">
-<option value="random">RANDOM</option>
-</select>
-
-YEAR
-<select id="year">
-<option value="random">RANDOM</option>
-</select>
-
-CVV
-<input id="cvv" placeholder="RANDOM IF EMPTY">
+<input id="bin" placeholder="ENTER BIN">
 
 QUANTITY
 <input id="qty" value="10">
@@ -242,23 +215,7 @@ TRICK ZONE BOOST CENTER
 
 <script>
 
-/* MONTH */
-
-for(let i=1;i<=12;i++){
-
-let m=i.toString().padStart(2,"0");
-
-month.innerHTML+=`<option value="${m}">${m}</option>`;
-
-}
-
-/* YEAR */
-
-for(let i=2026;i<=2035;i++){
-
-year.innerHTML+=`<option value="${i}">${i}</option>`;
-
-}
+/* RANDOM FUNCTION */
 
 function random(min,max){
 
@@ -266,34 +223,56 @@ return Math.floor(Math.random()*(max-min+1))+min;
 
 }
 
+/* GENERATE FUNCTION */
+
 function generate(){
 
-let out="";
+let qty=parseInt(document.getElementById("qty").value);
 
-for(let i=0;i<qty.value;i++){
+let output="CARD NUMBER        | MM | YY | CVV\n";
+output+="-------------------|----|----|----\n";
 
-let num=bin.value;
+for(let i=0;i<qty;i++){
 
-while(num.length<16)
+let num=document.getElementById("bin").value;
+
+while(num.length<16){
+
 num+=random(0,9);
 
-let mm=month.value=="random"?random(1,12):month.value;
+}
 
-let yy=year.value=="random"?random(2026,2035):year.value;
+/* MM 01-11 */
 
-let cv=cvv.value==""?random(100,999):cvv.value;
+let mm=random(1,11).toString().padStart(2,"0");
 
-out+=num+"|"+mm+"|"+yy+"|"+cv+"\n";
+/* YY 26-31 */
+
+let yy=random(26,31);
+
+/* CVV RANDOM */
+
+let cv=random(100,999);
+
+output+=
+num.padEnd(19," ")+"| "+
+mm+" | "+
+yy+" | "+
+cv+"\n";
 
 }
 
-result.value=out;
+document.getElementById("result").value=output;
 
 }
+
+/* COPY FUNCTION */
 
 function copy(){
 
-result.select();
+let text=document.getElementById("result");
+
+text.select();
 
 document.execCommand("copy");
 
