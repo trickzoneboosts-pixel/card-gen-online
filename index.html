@@ -9,35 +9,40 @@
 body{
 
 margin:0;
-font-family:Courier New, monospace;
-color:#00ff00;
+font-family:Consolas, monospace;
+color:#00ffcc;
 
-background-image:url("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80");
+/* PREMIUM HACKER BACKGROUND */
+
+background:
+linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
+url("https://wallpaperaccess.com/full/2825704.gif");
 
 background-size:cover;
 background-position:center;
-background-repeat:no-repeat;
 background-attachment:fixed;
 
 }
 
-/* MAIN PANEL FULL WIDTH */
+/* FULL SCREEN PANEL */
 
 .main{
 
-width:95vw;
-max-width:1600px;
+width:97vw;
+height:88vh;
 
 margin:auto;
-margin-top:30px;
+margin-top:2vh;
 
-background:rgba(0,0,0,0.80);
+background:rgba(0,0,0,0.75);
 
-padding:25px;
+border:1px solid #00ffcc;
 
-border:2px solid #00ff00;
+box-shadow:
+0 0 20px #00ffcc,
+0 0 40px #00ffcc inset;
 
-box-shadow:0 0 40px #00ff00;
+padding:30px;
 
 }
 
@@ -46,61 +51,57 @@ box-shadow:0 0 40px #00ff00;
 .title{
 
 text-align:center;
-
-font-size:22px;
-
+font-size:26px;
 margin-bottom:20px;
+letter-spacing:2px;
 
-text-shadow:0 0 10px #00ff00;
+text-shadow:0 0 10px #00ffcc;
 
 }
 
-/* FLEX LAYOUT */
+/* FLEX */
 
 .flex{
 
 display:flex;
+height:80%;
 
 gap:20px;
 
 }
 
-/* LEFT SIDE */
+/* LEFT */
 
 .left{
 
-width:40%;
+width:35%;
 
 }
 
-/* RIGHT SIDE */
+/* RIGHT */
 
 .right{
 
-width:60%;
+width:65%;
+height:100%;
 
 }
 
 /* INPUT */
 
-input,select{
+input, select{
 
 width:100%;
-
-padding:12px;
-
-margin-top:6px;
+padding:14px;
 margin-bottom:15px;
 
 background:black;
 
-color:#00ff00;
+color:#00ffcc;
 
-border:1px solid #00ff00;
+border:1px solid #00ffcc;
 
-font-family:Courier New;
-
-font-size:15px;
+font-size:16px;
 
 }
 
@@ -109,18 +110,17 @@ font-size:15px;
 textarea{
 
 width:100%;
-
-height:500px;
+height:85%;
 
 background:black;
 
-color:#00ff00;
+color:#00ffcc;
 
-border:1px solid #00ff00;
+border:1px solid #00ffcc;
 
-padding:10px;
+padding:15px;
 
-font-size:14px;
+font-size:15px;
 
 }
 
@@ -129,28 +129,25 @@ font-size:14px;
 button{
 
 width:100%;
-
-padding:14px;
+padding:15px;
 
 background:black;
 
-color:#00ff00;
+color:#00ffcc;
 
-border:1px solid #00ff00;
+border:1px solid #00ffcc;
+
+font-size:17px;
 
 cursor:pointer;
-
-font-size:16px;
-
-margin-top:10px;
 
 }
 
 button:hover{
 
-background:#001a00;
+background:#001a1a;
 
-box-shadow:0 0 10px #00ff00;
+box-shadow:0 0 15px #00ffcc;
 
 }
 
@@ -159,16 +156,7 @@ box-shadow:0 0 10px #00ff00;
 .footer{
 
 text-align:center;
-
-margin-top:15px;
-
-}
-
-.footer a{
-
-color:#00ff00;
-
-text-decoration:none;
+margin-top:10px;
 
 }
 
@@ -187,40 +175,29 @@ text-decoration:none;
 <div class="left">
 
 BIN
-
-<input type="text" id="bin">
+<input id="bin">
 
 MONTH
-
 <select id="month">
-
 <option value="random">RANDOM</option>
-
 </select>
 
 YEAR
-
 <select id="year">
-
 <option value="random">RANDOM</option>
-
 </select>
 
 CVV
-
-<input type="text" id="cvv" placeholder="RANDOM IF EMPTY">
+<input id="cvv" placeholder="RANDOM IF EMPTY">
 
 QUANTITY
-
-<input type="number" id="qty" value="10">
+<input id="qty" value="10">
 
 <button onclick="generate()">GENERATE CARDS</button>
 
 </div>
 
 <div class="right">
-
-RESULT
 
 <textarea id="result"></textarea>
 
@@ -232,17 +209,8 @@ RESULT
 
 <div class="footer">
 
-OWNER:
-<a href="https://t.me/SHUVO_MAHMUD01">
-MR SHUVO AHAMMAD
-</a>
-
-<br>
-
-CHANNEL:
-<a href="https://t.me/boost_help_zone04">
-TRICK ZONE BOOST CENTER
-</a>
+OWNER: MR SHUVO AHAMMAD<br>
+CHANNEL: TRICK ZONE BOOST CENTER
 
 </div>
 
@@ -253,80 +221,47 @@ TRICK ZONE BOOST CENTER
 /* MONTH */
 
 for(let i=1;i<=12;i++){
-
 let m=i.toString().padStart(2,"0");
-
-document.getElementById("month").innerHTML+=`<option value="${m}">${m}</option>`;
-
+month.innerHTML+=`<option value="${m}">${m}</option>`;
 }
 
 /* YEAR */
 
 for(let i=2026;i<=2035;i++){
-
-document.getElementById("year").innerHTML+=`<option value="${i}">${i}</option>`;
-
+year.innerHTML+=`<option value="${i}">${i}</option>`;
 }
-
-/* RANDOM */
 
 function random(min,max){
-
 return Math.floor(Math.random()*(max-min+1))+min;
-
 }
-
-/* GENERATE */
 
 function generate(){
 
-let bin=document.getElementById("bin").value;
-
-let month=document.getElementById("month").value;
-
-let year=document.getElementById("year").value;
-
-let cvv=document.getElementById("cvv").value;
-
-let qty=document.getElementById("qty").value;
-
 let out="";
 
-for(let i=0;i<qty;i++){
+for(let i=0;i<qty.value;i++){
 
-let number=bin;
+let num=bin.value;
 
-while(number.length<16){
+while(num.length<16)
+num+=random(0,9);
 
-number+=random(0,9);
+let mm=month.value=="random"?random(1,12):month.value;
+let yy=year.value=="random"?random(2026,2035):year.value;
+let cv=cvv.value==""?random(100,999):cvv.value;
 
-}
-
-let mm=(month=="random")?random(1,12).toString().padStart(2,"0"):month;
-
-let yy=(year=="random")?random(2026,2035):year;
-
-let cv=(cvv=="")?random(100,999):cvv;
-
-out+=number+"|"+mm+"|"+yy+"|"+cv+"\n";
+out+=num+"|"+mm+"|"+yy+"|"+cv+"\n";
 
 }
 
-document.getElementById("result").value=out;
+result.value=out;
 
 }
-
-/* COPY */
 
 function copy(){
 
-let text=document.getElementById("result");
-
-text.select();
-
+result.select();
 document.execCommand("copy");
-
-alert("COPIED SUCCESSFULLY");
 
 }
 
