@@ -1,164 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>CARD GEN ONLINE</title>
 
 <style>
 
 body{
-
-margin:0;
-font-family:Consolas, monospace;
-color:#00ffcc;
-
-background:
-linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
-url("https://wallpaperaccess.com/full/2825704.gif");
-
+background:url("https://i.ibb.co/4f3YQZP/hacker-bg.jpg");
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
-
+font-family:Consolas, monospace;
+margin:0;
+color:#00eaff;
 }
 
-/* MAIN PANEL */
-
-.main{
-
-width:98vw;
-height:92vh;
-
-margin:auto;
-margin-top:1vh;
-
-background:rgba(0,0,0,0.75);
-
-border:2px solid #00ffcc;
-
-box-shadow:
-0 0 20px #00ffcc,
-0 0 40px #00ffcc inset;
-
-padding:25px;
-
+.overlay{
+background:rgba(0,0,0,0.85);
+min-height:100vh;
+padding:20px;
 }
-
-/* TITLE */
 
 .title{
-
 text-align:center;
-font-size:36px;
+font-size:40px;
 margin-bottom:20px;
-font-weight:bold;
-
+text-shadow:0 0 20px #00eaff;
 }
 
-/* FLEX */
-
-.flex{
-
+.container{
 display:flex;
-height:75%;
 gap:20px;
-
 }
-
-/* LEFT */
 
 .left{
-
-width:35%;
-
+width:40%;
 }
-
-/* RIGHT */
 
 .right{
-
-width:65%;
-height:100%;
-
+width:60%;
 }
 
-/* INPUT */
-
-input{
-
-width:100%;
-padding:18px;
-margin-bottom:15px;
-
-background:black;
-color:#00ffcc;
-
-border:1px solid #00ffcc;
-
+label{
 font-size:20px;
-
 }
 
-/* RESULT */
-
-textarea{
-
+input, select{
 width:100%;
-height:85%;
-
+padding:15px;
+margin-top:5px;
+margin-bottom:15px;
 background:black;
-color:#00ffcc;
-
-border:1px solid #00ffcc;
-
-padding:20px;
-
-font-size:22px;
-
-font-family:Consolas, monospace;
-
-white-space:pre;
-
-line-height:1.8;
-
+border:2px solid #00eaff;
+color:#00eaff;
+font-size:20px;
 }
-
-/* BUTTON */
 
 button{
-
 width:100%;
-padding:18px;
-
+padding:15px;
 background:black;
-color:#00ffcc;
-
-border:1px solid #00ffcc;
-
+border:2px solid #00eaff;
+color:#00eaff;
 font-size:22px;
-
 cursor:pointer;
-
 }
 
-/* FOOTER */
+button:hover{
+background:#001a1a;
+}
+
+textarea{
+width:100%;
+height:500px;
+background:black;
+border:2px solid #00eaff;
+color:#00eaff;
+font-size:20px;
+padding:10px;
+}
 
 .footer{
-
 text-align:center;
-margin-top:10px;
-
-font-size:26px;
-
+margin-top:20px;
+font-size:22px;
+line-height:40px;
 }
 
 .footer a{
-
-color:#00ffcc;
+color:#00eaff;
 text-decoration:none;
-
-font-size:28px;
-
+font-weight:bold;
 }
 
 </style>
@@ -167,19 +99,44 @@ font-size:28px;
 
 <body>
 
-<div class="main">
+<div class="overlay">
 
-<div class="title">[ ACCESS GRANTED - CARD GEN ONLINE ]</div>
+<div class="title">
+[ ACCESS GRANTED - CARD GEN ONLINE ]
+</div>
 
-<div class="flex">
+<div class="container">
 
 <div class="left">
 
-BIN
-<input id="bin" placeholder="ENTER BIN">
+<label>BIN</label>
+<input type="text" id="bin" placeholder="Enter BIN">
 
-QUANTITY
-<input id="qty" value="10">
+<label>MONTH</label>
+<select id="month">
+<option value="">Random</option>
+<option>01</option><option>02</option><option>03</option>
+<option>04</option><option>05</option><option>06</option>
+<option>07</option><option>08</option><option>09</option>
+<option>10</option><option>11</option>
+</select>
+
+<label>YEAR</label>
+<select id="year">
+<option value="">Random</option>
+<option>26</option>
+<option>27</option>
+<option>28</option>
+<option>29</option>
+<option>30</option>
+<option>31</option>
+</select>
+
+<label>CVV</label>
+<input type="text" id="cvv" placeholder="Random if empty">
+
+<label>QUANTITY</label>
+<input type="number" id="qty" value="10">
 
 <button onclick="generate()">GENERATE CARDS</button>
 
@@ -202,7 +159,14 @@ OWNER:
 MR SHUVO AHAMMAD
 </a>
 
-<br><br>
+<br>
+
+USER ID:
+<a href="https://t.me/SHUVO_MAHMUD01" target="_blank">
+@SHUVO_MAHMUD01
+</a>
+
+<br>
 
 CHANNEL:
 <a href="https://t.me/boost_help_zone04" target="_blank">
@@ -215,68 +179,61 @@ TRICK ZONE BOOST CENTER
 
 <script>
 
-/* RANDOM FUNCTION */
-
-function random(min,max){
-
-return Math.floor(Math.random()*(max-min+1))+min;
-
+function randomDigit(){
+return Math.floor(Math.random()*10);
 }
 
-/* GENERATE FUNCTION */
+function randomMonth(){
+return String(Math.floor(Math.random()*11)+1).padStart(2,"0");
+}
+
+function randomYear(){
+return String(Math.floor(Math.random()*6)+26);
+}
+
+function randomCVV(){
+return String(Math.floor(Math.random()*900)+100);
+}
 
 function generate(){
 
-let qty=parseInt(document.getElementById("qty").value);
+var bin=document.getElementById("bin").value;
+var month=document.getElementById("month").value;
+var year=document.getElementById("year").value;
+var cvv=document.getElementById("cvv").value;
+var qty=document.getElementById("qty").value;
 
-let output="CARD NUMBER        | MM | YY | CVV\n";
-output+="-------------------|----|----|----\n";
+var result="";
 
-for(let i=0;i<qty;i++){
+for(var i=0;i<qty;i++){
 
-let num=document.getElementById("bin").value;
+var card=bin;
 
-while(num.length<16){
+while(card.length<16){
+card+=randomDigit();
+}
 
-num+=random(0,9);
+var mm=month || randomMonth();
+var yy=year || randomYear();
+var cv=cvv || randomCVV();
+
+result+=card+" | "+mm+" | 20"+yy+" | "+cv+"\n";
 
 }
 
-/* MM 01-11 */
-
-let mm=random(1,11).toString().padStart(2,"0");
-
-/* YY 26-31 */
-
-let yy=random(26,31);
-
-/* CVV RANDOM */
-
-let cv=random(100,999);
-
-output+=
-num.padEnd(19," ")+"| "+
-mm+" | "+
-yy+" | "+
-cv+"\n";
+document.getElementById("result").value=result;
 
 }
-
-document.getElementById("result").value=output;
-
-}
-
-/* COPY FUNCTION */
 
 function copy(){
 
-let text=document.getElementById("result");
+var text=document.getElementById("result");
 
 text.select();
 
 document.execCommand("copy");
 
-alert("COPIED SUCCESSFULLY");
+alert("Copied");
 
 }
 
